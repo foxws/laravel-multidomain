@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "foxws/laravel-multidomain",
+    "description": "A Laravel extension for using a Laravel application on a multi domain setting",
     "keywords": [
-        ":vendor_name",
+        "foxws",
         "laravel",
-        ":package_slug"
+        "laravel-multidomain"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/foxws/laravel-multidomain",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "foxws",
+            "email": "email@example.com",
             "role": "Developer"
         }
     ],
@@ -35,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "Foxws\\LaravelMultidomain\\": "src",
+            "Foxws\\LaravelMultidomain\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Foxws\\LaravelMultidomain\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -56,10 +56,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Foxws\\LaravelMultidomain\\LaravelMultidomainServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "LaravelMultidomain": "Foxws\\LaravelMultidomain\\Facades\\LaravelMultidomain"
             }
         }
     },

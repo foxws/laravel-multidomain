@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Foxws\LaravelMultidomain\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelMultidomainCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-multidomain';
 
     public $description = 'My command';
 
