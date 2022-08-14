@@ -2,9 +2,9 @@
 
 namespace Foxws\LaravelMultidomain\Tests;
 
+use Foxws\LaravelMultidomain\LaravelMultidomainServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Foxws\LaravelMultidomain\LaravelMultidomainServiceProvider;
 
 class TestCase extends Orchestra
 {

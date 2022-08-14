@@ -2,9 +2,9 @@
 
 namespace Foxws\LaravelMultidomain;
 
+use Foxws\LaravelMultidomain\Commands\LaravelMultidomainCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Foxws\LaravelMultidomain\Commands\LaravelMultidomainCommand;
 
 class LaravelMultidomainServiceProvider extends PackageServiceProvider
 {
