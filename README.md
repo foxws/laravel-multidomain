@@ -5,8 +5,6 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/foxws/laravel-multidomain/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/foxws/laravel-multidomain/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/foxws/laravel-multidomain.svg?style=flat-square)](https://packagist.org/packages/foxws/laravel-multidomain)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
 ## Installation
 
 You can install the package via composer:
@@ -25,14 +23,68 @@ This is the contents of the published config file:
 
 ```php
 return [
+    /*
+    |--------------------------------------------------------------------------
+    | Domains path
+    |--------------------------------------------------------------------------
+    |
+    | This path used for save the generated domain. This path also will be added
+    | automatically to list of scanned folders.
+    |
+    */
+
+    'path' => app_path('Domain'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Scan Path
+    |--------------------------------------------------------------------------
+    |
+    | Here you define which folder will be scanned. By default will scan vendor
+    | directory. This is useful if you host the package in packagist website.
+    |
+    */
+
+    'scan' => [
+        'enabled' => true,
+        'paths' => [
+            app_path('Domain/*'),
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Caching
+    |--------------------------------------------------------------------------
+    |
+    | Here is the config for setting up caching feature.
+    |
+    */
+
+    'cache' => [
+        'enabled' => false,
+        'key' => 'multidomain',
+        'lifetime' => 60,
+    ],
 ];
 ```
 
 ## Usage
 
-```php
-$laravelMultidomain = new Foxws\LaravelMultidomain();
-echo $laravelMultidomain->echoPhrase('Hello, Foxws!');
+Create a `domain.json` file in each domain directory.
+
+e.g. `App\Domain\Example\domain.json`:
+
+```json
+{
+    "name": "Example",
+    "enabled": true,
+    "domain": {
+        "local": "example.test",
+        "staging": "example.dev",
+        "production": "example.com"
+    }
+}
 ```
 
 ## Testing
