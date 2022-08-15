@@ -19,6 +19,8 @@ interface RepositoryInterface
 
     public function getCached(): array;
 
+    public function removeCached(): void;
+
     public function toCollection(): Collection;
 
     public function find(string $name): ?Domain;

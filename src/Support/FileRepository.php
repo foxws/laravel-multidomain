@@ -62,6 +62,11 @@ abstract class FileRepository implements RepositoryInterface
         });
     }
 
+    public function removeCached(): void
+    {
+        Cache::forget($this->config('cache.key'));
+    }
+
     public function toCollection(): Collection
     {
         return Collection::make($this->scan())

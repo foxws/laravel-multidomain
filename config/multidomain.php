@@ -42,6 +42,6 @@ return [
     'cache' => [
         'enabled' => false,
         'key' => 'multidomain',
-        'lifetime' => 60,
+        'lifetime' => 60 * 60 * 24,
     ],
 ];

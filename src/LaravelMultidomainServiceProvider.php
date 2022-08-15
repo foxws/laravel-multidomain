@@ -2,7 +2,8 @@
 
 namespace Foxws\LaravelMultidomain;
 
-use Foxws\LaravelMultidomain\Commands\MultidomainCommand;
+use Foxws\LaravelMultidomain\Commands\CacheCommand;
+use Foxws\LaravelMultidomain\Commands\ClearCommand;
 use Foxws\LaravelMultidomain\Providers\BootstrapServiceProvider;
 use Foxws\LaravelMultidomain\Providers\DomainServiceProvider;
 use Spatie\LaravelPackageTools\Package;
@@ -20,7 +21,10 @@ class LaravelMultidomainServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-multidomain')
             ->hasConfigFile()
-            ->hasCommand(MultidomainCommand::class);
+            ->hasCommand(
+                CacheCommand::class,
+                ClearCommand::class,
+            );
     }
 
     public function registeringPackage()

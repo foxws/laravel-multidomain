@@ -48,7 +48,7 @@ abstract class BaseDomain
 
     public function getPath(): string
     {
-        return app_path("Domain/{$this->getName()}");
+        return config('multidomain.path') . '/' . $this->getName();
     }
 
     public function getNamespace(): string
