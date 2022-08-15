@@ -35,8 +35,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Foxws\\LaravelMultidomain\\": "src",
-            "Foxws\\LaravelMultidomain\\Database\\Factories\\": "database/factories"
+            "Foxws\\LaravelMultidomain\\": "src"
         }
     },
     "autoload-dev": {

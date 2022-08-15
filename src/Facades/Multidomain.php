@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Facade;
 /**
  * @see \Foxws\LaravelMultidomain\LaravelMultidomain
  */
-class LaravelMultidomain extends Facade
+class Multidomain extends Facade
 {
     protected static function getFacadeAccessor()
     {

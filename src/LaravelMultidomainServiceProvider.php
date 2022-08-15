@@ -2,7 +2,9 @@
 
 namespace Foxws\LaravelMultidomain;
 
-use Foxws\LaravelMultidomain\Commands\LaravelMultidomainCommand;
+use Foxws\LaravelMultidomain\Commands\MultidomainCommand;
+use Foxws\LaravelMultidomain\Providers\BootstrapServiceProvider;
+use Foxws\LaravelMultidomain\Providers\DomainServiceProvider;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -18,8 +20,12 @@ class LaravelMultidomainServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-multidomain')
             ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel-multidomain_table')
-            ->hasCommand(LaravelMultidomainCommand::class);
+            ->hasCommand(MultidomainCommand::class);
+    }
+
+    public function registeringPackage()
+    {
+        $this->app->register(DomainServiceProvider::class);
+        $this->app->register(BootstrapServiceProvider::class);
     }
 }

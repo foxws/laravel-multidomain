@@ -4,7 +4,7 @@ namespace Foxws\LaravelMultidomain\Commands;
 
 use Illuminate\Console\Command;
 
-class LaravelMultidomainCommand extends Command
+class MultidomainCommand extends Command
 {
     public $signature = 'laravel-multidomain';
 
