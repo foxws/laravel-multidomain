@@ -108,6 +108,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 ## Credits
 
 - [foxws](https://github.com/foxws)
+- [laravel-modules](https://github.com/nWidart/laravel-modules)
 - [All Contributors](../../contributors)
 
 ## License
