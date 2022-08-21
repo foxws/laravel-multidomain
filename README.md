@@ -89,8 +89,7 @@ e.g. `App\Domain\Example\domain.json`:
 
 When using Spatie's [laravel-multitenancy](https://github.com/spatie/laravel-multitenancy/discussions/244), one may want to use the following tasks to auto register service providers for each domain:
 
-```
-php
+```php
 namespace App\Support\Multitenancy\Tasks;
 
 use Foxws\LaravelMultidomain\Contracts\RepositoryInterface;
