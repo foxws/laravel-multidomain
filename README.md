@@ -87,6 +87,35 @@ e.g. `App\Domain\Example\domain.json`:
 }
 ```
 
+When using Spatie's [laravel-multitenancy](https://github.com/spatie/laravel-multitenancy/discussions/244), one may want to use the following tasks to auto register service providers for each domain:
+
+```
+php
+namespace App\Support\Multitenancy\Tasks;
+
+use Foxws\LaravelMultidomain\Contracts\RepositoryInterface;
+use Foxws\LaravelMultidomain\Support\DomainRepository;
+use Spatie\Multitenancy\Models\Tenant;
+use Spatie\Multitenancy\Tasks\SwitchTenantTask;
+
+class SwitchDomainTask implements SwitchTenantTask
+{
+    public function makeCurrent(Tenant $tenant): void
+    {
+        /** @var DomainRepository $repository */
+        $repository = app(RepositoryInterface::class);
+
+        if ($domain = $repository->find($tenant->name)) {
+            $domain->registerProviders();
+        }
+    }
+
+    public function forgetCurrent(): void
+    {
+    }
+}
+```
+
 ## Testing
 
 ```bash
