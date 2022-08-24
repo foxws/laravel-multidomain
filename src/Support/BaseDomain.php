@@ -27,11 +27,6 @@ abstract class BaseDomain
     {
     }
 
-    public function getName(): string
-    {
-        return $this->getAttribute('name');
-    }
-
     public function getEnabled(): bool
     {
         return $this->getAttribute('enabled');
@@ -46,6 +41,16 @@ abstract class BaseDomain
         };
     }
 
+    public function getName(): string
+    {
+        return $this->getAttribute('name');
+    }
+
+    public function getLowerName(): string
+    {
+        return strtolower($this->getAttribute('name'));
+    }
+
     public function getPath(): string
     {
         return config('multidomain.path').'/'.$this->getName();
@@ -53,7 +58,7 @@ abstract class BaseDomain
 
     public function getNamespace(): string
     {
-        return strtolower($this->getAttribute('name'));
+        return config('multidomain.namespace').'\\'.$this->getName();
     }
 
     public function getAttributes(): array

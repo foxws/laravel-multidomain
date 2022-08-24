@@ -3,11 +3,21 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Domains path
+    | Domain namespace
     |--------------------------------------------------------------------------
     |
-    | This path used for save the generated domain. This path also will be added
-    | automatically to list of scanned folders.
+    | This defines the domain root namespace.
+    |
+    */
+
+    'namespace' => 'App\\Domain',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Domain path
+    |--------------------------------------------------------------------------
+    |
+    | This defines the domain root path.
     |
     */
 
@@ -18,16 +28,13 @@ return [
     | Scan Path
     |--------------------------------------------------------------------------
     |
-    | Here you define which folder will be scanned. By default will scan vendor
-    | directory. This is useful if you host the package in packagist website.
+    | This defines the path to scan for domains.
     |
     */
 
     'scan' => [
         'enabled' => true,
-        'paths' => [
-            app_path('Domain/*'),
-        ],
+        'path' => app_path('Domain/*'),
     ],
 
     /*
@@ -35,7 +42,7 @@ return [
     | Caching
     |--------------------------------------------------------------------------
     |
-    | Here is the config for setting up caching feature.
+    | This defines config for setting up caching.
     |
     */
 

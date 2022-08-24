@@ -5,6 +5,7 @@ namespace Foxws\LaravelMultidomain;
 use Foxws\LaravelMultidomain\Support\BaseDomain;
 use Illuminate\Contracts\Foundation\CachesConfiguration;
 use Illuminate\Contracts\Foundation\CachesRoutes;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
@@ -14,7 +15,7 @@ class Domain extends BaseDomain
     public function registerWebRoutes(): void
     {
         Route::group([
-            'as' => "{$this->getNamespace()}.",
+            'as' => "{$this->getLowerName()}.",
             'domain' => $this->getDomain(),
             'middleware' => 'web',
         ], function () {
@@ -25,7 +26,7 @@ class Domain extends BaseDomain
     public function registerApiRoutes(): void
     {
         Route::group([
-            'as' => "{$this->getNamespace()}.",
+            'as' => "{$this->getLowerName()}.",
             'domain' => $this->getDomain(),
             'prefix' => 'api',
             'middleware' => 'api',
@@ -41,19 +42,21 @@ class Domain extends BaseDomain
         foreach ($paths as $path) {
             $name = pathinfo($path, PATHINFO_FILENAME);
 
-            $this->mergeConfigFrom($path, "{$this->getNamespace()}.".strtolower($name));
+            $this->mergeConfigFrom($path, "{$this->getLowerName()}.".strtolower($name));
         }
     }
 
     public function registerResources(): void
     {
+        $this->registerComponentNamespace();
+
         $this->loadTranslationsFrom("{$this->getPath()}/Resources/Translations");
         $this->loadViewsFrom("{$this->getPath()}/Resources/Views");
     }
 
     public function registerProviders(): void
     {
-        $config = Config::get("{$this->getNamespace()}.app.providers", []);
+        $config = Config::get("{$this->getLowerName()}.app.providers", []);
 
         $providers = collect($config);
         $providers->each(fn (string $provider) => $this->app->register($provider));
@@ -78,13 +81,13 @@ class Domain extends BaseDomain
     protected function loadTranslationsFrom(string $path): void
     {
         $this->callAfterResolving('translator', function ($translator) use ($path) {
-            $translator->addNamespace($this->getNamespace(), $path);
+            $translator->addNamespace($this->getLowerName(), $path);
         });
     }
 
     protected function loadViewsFrom(string|array $path): void
     {
-        $namespace = $this->getNamespace();
+        $namespace = $this->getLowerName();
 
         $this->callAfterResolving('view', function ($view) use ($path, $namespace) {
             if (isset($this->app->config['view']['paths']) &&
@@ -98,6 +101,13 @@ class Domain extends BaseDomain
 
             $view->addNamespace($namespace, $path);
         });
+    }
+
+    protected function registerComponentNamespace(): void
+    {
+        $namespace = $this->getNamespace().'\\Resources\\Components';
+
+        Blade::componentNamespace($namespace, $this->getLowerName());
     }
 
     protected function callAfterResolving(string $name, callable $callback): void

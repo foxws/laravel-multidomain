@@ -35,14 +35,14 @@ abstract class FileRepository implements RepositoryInterface
     public function allEnabled(): array
     {
         return Collection::make($this->all())
-            ->filter(fn (Domain $domain) => $domain->getEnabled() === true)
+            ->filter(fn (Domain $domain) => true === $domain->getEnabled())
             ->all();
     }
 
     public function allDisabled(): array
     {
         return Collection::make($this->all())
-            ->filter(fn (Domain $domain) => $domain->getEnabled() === false)
+            ->filter(fn (Domain $domain) => false === $domain->getEnabled())
             ->all();
     }
 
@@ -95,34 +95,32 @@ abstract class FileRepository implements RepositoryInterface
 
     protected function scan(): array
     {
-        $paths = $this->getScanPaths();
+        $path = $this->getScanPath();
+
+        $manifests = File::glob("{$path}/domain.json");
+
+        is_array($manifests) || $manifests = [];
 
         $domains = [];
 
-        foreach ($paths as $path) {
-            $manifests = File::glob("{$path}/domain.json");
+        foreach ($manifests as $manifest) {
+            $attributes = json_decode($this->getContents($manifest), true);
 
-            is_array($manifests) || $manifests = [];
+            throw_if(json_last_error() > 0, RuntimeException::class, json_last_error_msg());
 
-            foreach ($manifests as $manifest) {
-                $attributes = json_decode($this->getContents($manifest), true);
-
-                throw_if(json_last_error() > 0, RuntimeException::class, json_last_error_msg());
-
-                $domains[] = $this->createDomain($this->app, $attributes);
-            }
+            $domains[] = $this->createDomain($this->app, $attributes);
         }
 
         return $domains;
     }
 
-    protected function getScanPaths(): array
+    protected function getScanPath(): string
     {
         if (! $this->config('scan.enabled')) {
             return [];
         }
 
-        return $this->config('scan.paths');
+        return $this->config('scan.path');
     }
 
     protected function formatCached(array $cached): array
