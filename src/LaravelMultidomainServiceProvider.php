@@ -21,7 +21,7 @@ class LaravelMultidomainServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-multidomain')
             ->hasConfigFile()
-            ->hasCommand(
+            ->hasCommands(
                 CacheCommand::class,
                 ClearCommand::class,
             );
