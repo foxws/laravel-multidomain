@@ -75,9 +75,9 @@ abstract class FileRepository implements RepositoryInterface
 
     public function find(string $name): ?Domain
     {
-        foreach ($this->all() as $module) {
-            if ($module->getName() === $name) {
-                return $module;
+        foreach ($this->all() as $domain) {
+            if ($domain->getDomain() === $name) {
+                return $domain;
             }
         }
 

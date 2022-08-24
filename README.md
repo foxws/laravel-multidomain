@@ -40,7 +40,7 @@ return [
     | Scan Path
     |--------------------------------------------------------------------------
     |
-    | Here you define which folder will be scanned. By default will scan vendor
+    | Here you define which folder will be scanned. By default will scan app
     | directory. This is useful if you host the package in packagist website.
     |
     */
@@ -104,7 +104,7 @@ class SwitchDomainTask implements SwitchTenantTask
         /** @var DomainRepository $repository */
         $repository = app(RepositoryInterface::class);
 
-        if ($domain = $repository->find($tenant->name)) {
+        if ($domain = $repository->find($tenant->domain)) {
             $domain->registerProviders();
         }
     }

@@ -70,7 +70,9 @@ abstract class BaseDomain
 
     abstract public function registerApiRoutes(): void;
 
-    abstract public function registerProviders(): void;
+    abstract public function registerConfigs(): void;
 
     abstract public function registerResources(): void;
+
+    abstract public function registerProviders(): void;
 }
