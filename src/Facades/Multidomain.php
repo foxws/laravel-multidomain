@@ -11,6 +11,6 @@ class Multidomain extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \Foxws\LaravelMultidomain\LaravelMultidomain::class;
+        return \Foxws\LaravelMultidomain\Domain::class;
     }
 }

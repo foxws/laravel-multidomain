@@ -1,8 +1,10 @@
 <?php
 
-use Foxws\LaravelMultidomain\Helpers\ConsoleOutput;
+use Foxws\LaravelMultidomain\Domain;
 
-function consoleOutput(): ConsoleOutput
-{
-    return app(ConsoleOutput::class);
+if (! function_exists('domain')) {
+    function domain(string $name): ?Domain
+    {
+        return app('domains')->find($name);
+    }
 }
