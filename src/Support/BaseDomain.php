@@ -53,7 +53,7 @@ abstract class BaseDomain
 
     public function getPath(): string
     {
-        return config('multidomain.path'). DIRECTORY_SEPARATOR . $this->getName();
+        return config('multidomain.path').DIRECTORY_SEPARATOR.$this->getName();
     }
 
     public function getNamespace(): string
