@@ -1,5 +1,5 @@
 <?php
 
-use Foxws\LaravelMultidomain\Tests\TestCase;
+use Foxws\LaravelMultidomain\Tests\BaseTestCase;
 
-uses(TestCase::class)->in(__DIR__);
+uses(BaseTestCase::class)->in(__DIR__);
