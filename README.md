@@ -55,9 +55,9 @@ The structure of each domain should look like this, using `app\Domain\Example` a
 | Routes\api.php | The domain api routes. | ✅ |
 | Config\\*.php | The domain config files. | ✅ |
 | Providers | The domain providers (optional). | |
-| Resources\Translations | The domain translation files. | |
-| Resources\Views | The domain Blade views. | ✅ |
-| Resources\Components | The domain Blade components. | ✅ |
+| Resources\Translations | The domain translation files (optional). | |
+| Resources\Views | The domain Blade views (optional). | ✅ |
+| Resources\Components | The domain Blade components (optional). | ✅ |
 
 It will register each config, routes, views, components, using the domain's namespace in lowercase, e.g. `example`.
 
