@@ -5,15 +5,23 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/foxws/laravel-multidomain/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/foxws/laravel-multidomain/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/foxws/laravel-multidomain.svg?style=flat-square)](https://packagist.org/packages/foxws/laravel-multidomain)
 
+## Description
+
+This package allows a single Laravel application to work with multiple domains.
+
+It is intended to complement a multi-tenancy package such as [spatie/laravel-multitenancy](https://github.com/spatie/laravel-multitenancy), [archtechx/tenancy](https://github.com/archtechx/tenancy), etc.
+
+It allows caching of configs, routes & views, and is made to be easy to install, as there is no need to modify the core of the Laravel Framework.
+
 ## Installation
 
-You can install the package via composer:
+Install the package via composer:
 
 ```bash
 composer require foxws/laravel-multidomain
 ```
 
-You can publish the config file with:
+Publish the config file with:
 
 ```bash
 php artisan vendor:publish --tag="multidomain-config"
@@ -21,9 +29,9 @@ php artisan vendor:publish --tag="multidomain-config"
 
 ## Usage
 
-Create a `domain.json` file in each domain directory.
+The package will scan any subfolder (domain) located in `app\Domain` containing a `domain.json` file.
 
-e.g. `App\Domain\Example\domain.json`:
+e.g. `app\Domain\Example\domain.json`:
 
 ```json
 {
@@ -37,7 +45,39 @@ e.g. `App\Domain\Example\domain.json`:
 }
 ```
 
+> **NOTE:** The `domain` array matches the environment set in `.env`, e.g. `APP_ENV=local` will use `example.test` as it's base.
+
+The structure of each domain should look like this, using `app\Domain\Example` as it's root path:
+
+| Path | Description | Cachable |
+| --- | --- | --- |
+| Routes\web.php | The domain web routes. | ✅ |
+| Routes\api.php | The domain api routes. | ✅ |
+| Config\\*.php | The domain config files. | ✅ |
+| Providers | The domain providers (optional). | |
+| Resources\Translations | The domain translation files. | |
+| Resources\Views | The domain Blade views. | ✅ |
+| Resources\Components | The domain Blade components. | ✅ |
+
+It will register each config, routes, views, components, using the domain's namespace in lowercase, e.g. `example`.
+
+> **NOTE:** Service Providers will not be registred by default, see [Switch Task](#switch-task) to register at runtime.
+
+To interact with the domain(s), one may use the following:
+
+| Helper | Description |
+| --- | --- |
+| `config('example.app.name')` | Would return the name of the application. |
+| `route('example.home'` | Would return the route to `/`. |
+| `view('example::home')` | Would return the `home.blade.php` located in views. |
+| `domain('example')` | Would return a domain instance. |
+| `<x-example::menu-component />` | Would return the `MenuComponent` located in components. |
+
+## Switch Task
+
 When using Spatie's [laravel-multitenancy](https://github.com/spatie/laravel-multitenancy), one may want to use the following task to auto register service providers for each domain:
+
+> **NOTE:** See [https://spatie.be/docs/laravel-multitenancy/v2/using-tasks-to-prepare-the-environment/creating-your-own-task] for details.
 
 ```php
 namespace App\Support\Multitenancy\Tasks;
