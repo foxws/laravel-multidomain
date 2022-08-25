@@ -61,9 +61,19 @@ abstract class BaseDomain
         return config('multidomain.namespace').'\\'.$this->getName();
     }
 
-    public function getComponent(string $name): string
+    public function config(string $path): string
+    {
+        return config("{$this->getLowerName()}.{$path}");
+    }
+
+    public function component(string $name): string
     {
         return "{$this->getLowerName()}::{$name}";
+    }
+
+    public function route(string $name, array $parameters = [], bool $absolute = false): string
+    {
+        return route("{$this->getLowerName()}.{$name}", $parameters, $absolute);
     }
 
     public function getAttributes(): array
