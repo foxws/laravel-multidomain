@@ -49,7 +49,7 @@ e.g. `app\Domain\Example\domain.json`:
 
 The structure of each domain should look like this, using `app\Domain\Example` as it's root path:
 
-| Path | Description | Cachable |
+| Path | Description | Cacheable |
 | --- | --- | --- |
 | Routes\web.php | The domain web routes. | ✅ |
 | Routes\api.php | The domain api routes. | ✅ |
