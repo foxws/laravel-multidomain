@@ -1,4 +1,4 @@
-# A Laravel extension for using a Laravel application on a multi domain setting
+# A Laravel extension for a multi domain/tenant setting
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/foxws/laravel-multidomain.svg?style=flat-square)](https://packagist.org/packages/foxws/laravel-multidomain)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/foxws/laravel-multidomain/run-tests?label=tests)](https://github.com/foxws/laravel-multidomain/actions?query=workflow%3Arun-tests+branch%3Amain)
@@ -7,7 +7,7 @@
 
 ## Description
 
-This package allows a single Laravel application to work with multiple domains.
+This package allows a single Laravel application to work with multiple domains/tenants.
 
 It is intended to complement a multi-tenancy package such as [spatie/laravel-multitenancy](https://github.com/spatie/laravel-multitenancy), [archtechx/tenancy](https://github.com/archtechx/tenancy), etc.
 
@@ -77,7 +77,7 @@ To interact with the domain(s), one may use the following:
 
 When using Spatie's [laravel-multitenancy](https://github.com/spatie/laravel-multitenancy), one may want to use the following task to auto register service providers for each domain:
 
-> **NOTE:** See [https://spatie.be/docs/laravel-multitenancy/v2/using-tasks-to-prepare-the-environment/creating-your-own-task] for details.
+> **NOTE:** Please see [documentation](https://spatie.be/docs/laravel-multitenancy/v2/using-tasks-to-prepare-the-environment/creating-your-own-task) for details.
 
 ```php
 namespace App\Support\Multitenancy\Tasks;
@@ -127,6 +127,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 - [foxws](https://github.com/foxws)
 - [laravel-modules](https://github.com/nWidart/laravel-modules)
+- [Spatie](https://github.com/spatie)
 - [All Contributors](../../contributors)
 
 ## License
