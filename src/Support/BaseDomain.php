@@ -61,7 +61,7 @@ abstract class BaseDomain
         return config('multidomain.namespace').'\\'.$this->getName();
     }
 
-    public function config(string $path): string
+    public function config(string $path): mixed
     {
         return config("{$this->getLowerName()}.{$path}");
     }
