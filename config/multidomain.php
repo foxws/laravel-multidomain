@@ -46,9 +46,7 @@ return [
     |
     */
 
-    'cache' => [
-        'enabled' => false,
-        'key' => 'multidomain',
-        'lifetime' => 60 * 60 * 24,
-    ],
+    'cache_store' => env('MULTIDOMAIN_CACHE_DRIVER', 'redis'),
+
+    'cache_tag' => env('MULTIDOMAIN_CACHE_TAG', ''),
 ];
