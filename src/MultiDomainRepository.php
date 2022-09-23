@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Foxws\MultiDomain;
 
 use Illuminate\Cache\Repository;
