@@ -2,7 +2,7 @@
 
 namespace Foxws\LaravelMultidomain\Tests;
 
-use Foxws\LaravelMultidomain\LaravelMultidomainServiceProvider;
+use Foxws\MultiDomain\MultiDomainServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class BaseTestCase extends Orchestra
@@ -15,7 +15,7 @@ abstract class BaseTestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            LaravelMultidomainServiceProvider::class,
+            MultiDomainServiceProvider::class,
         ];
     }
 
