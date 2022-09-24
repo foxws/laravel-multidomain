@@ -2,7 +2,6 @@
 
 namespace Foxws\MultiDomain;
 
-use Foxws\MultiDomain\Commands\CacheCommand;
 use Foxws\MultiDomain\Commands\ClearCommand;
 use Foxws\MultiDomain\Providers\DomainServiceProvider;
 use Spatie\LaravelPackageTools\Package;
