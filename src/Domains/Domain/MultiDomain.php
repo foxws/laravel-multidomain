@@ -1,8 +1,8 @@
 <?php
 
-namespace Foxws\LivewireMultidomain\Domains\Domain;
+namespace Foxws\MultiDomain\Domains\Domain;
 
-use Foxws\LivewireMultidomain\Domains\Domain;
+use Foxws\MultiDomain\Domains\Domain;
 
 class MultiDomain extends Domain
 {
@@ -20,8 +20,6 @@ class MultiDomain extends Domain
 
     public function toArray(): array
     {
-        return [
-            $this->attributes,
-        ];
+        return $this->attributes;
     }
 }

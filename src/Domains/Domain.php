@@ -1,6 +1,6 @@
 <?php
 
-namespace Foxws\LaravelMultidomain\Domains;
+namespace Foxws\MultiDomain\Domains;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;

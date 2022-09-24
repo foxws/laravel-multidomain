@@ -1,6 +1,6 @@
 <?php
 
-namespace Foxws\LaravelMultidomain\Facades;
+namespace Foxws\MultiDomain\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -11,6 +11,6 @@ class MultiDomain extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \Foxws\MultiDomain\Domain::class;
+        return \Foxws\MultiDomain\MultiDomain::class;
     }
 }
