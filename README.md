@@ -9,7 +9,7 @@
 
 This package allows a single Laravel application to work with multiple domains/tenants.
 
-It is intended to complement a multi-tenancy package such as [spatie/laravel-multitenancy](https://github.com/spatie/laravel-multitenancy), [archtechx/tenancy](https://github.com/archtechx/tenancy), etc.
+It is intended to complement a multi-tenancy package such as [spatie/laravel-multitenancy](https://github.com/spatie/laravel-multitenancy) (tested), [archtechx/tenancy](https://github.com/archtechx/tenancy), etc.
 
 It allows caching of configs, routes & views, and is made to be easy to install, as there is no need to modify the core of the Laravel Framework.
 
@@ -36,7 +36,6 @@ e.g. `app\Domain\Example\domain.json`:
 ```json
 {
     "name": "Example",
-    "enabled": true,
     "domain": {
         "local": "example.test",
         "staging": "example.dev",
@@ -45,7 +44,7 @@ e.g. `app\Domain\Example\domain.json`:
 }
 ```
 
-> **NOTE:** The `domain` array matches the environment set in `.env`, e.g. `APP_ENV=local` will use `example.test` as it's base.
+> **NOTE:** The `domain` array matches the environment set in `.env`, e.g. `APP_ENV=local` will use `example.test` as it's (route) base.
 
 The structure of each domain should look like this, using `app\Domain\Example` as it's root path:
 
@@ -68,7 +67,7 @@ To interact with the domain(s), one may use the following:
 | Helper | Description |
 | --- | --- |
 | `config('example.app.name')` | Would return the name of the application. |
-| `route('example.home'` | Would return the route to `/`. |
+| `route('example.home')` | Would return the route to `/`. |
 | `view('example::home')` | Would return the `home.blade.php` located in views. |
 | `domain('example')` | Would return a domain instance. |
 | `<x-example::menu-component />` | Would return the `MenuComponent` located in components. |
@@ -80,10 +79,10 @@ When using Spatie's [laravel-multitenancy](https://github.com/spatie/laravel-mul
 > **NOTE:** Please see [documentation](https://spatie.be/docs/laravel-multitenancy/v2/using-tasks-to-prepare-the-environment/creating-your-own-task) for details.
 
 ```php
-namespace App\Support\Multitenancy\Tasks;
+namespace App\Core\Support\Multitenancy\Tasks;
 
-use Foxws\LaravelMultidomain\Contracts\RepositoryInterface;
-use Foxws\LaravelMultidomain\Support\DomainRepository;
+use Foxws\MultiDomain\Facades\MultiDomain;
+use Foxws\MultiDomain\Providers\DomainServiceProvider;
 use Spatie\Multitenancy\Models\Tenant;
 use Spatie\Multitenancy\Tasks\SwitchTenantTask;
 
@@ -91,16 +90,24 @@ class SwitchDomainTask implements SwitchTenantTask
 {
     public function makeCurrent(Tenant $tenant): void
     {
-        /** @var DomainRepository $repository */
-        $repository = app(RepositoryInterface::class);
+        $domains = MultiDomain::findByDomain($tenant->domain);
 
-        if ($domain = $repository->find($tenant->domain)) {
-            $domain->registerProviders();
+        foreach ($domains as $domain) {
+            app(DomainServiceProvider::class, compact('domain'))
+                ->registerProviders();
         }
     }
 
     public function forgetCurrent(): void
     {
+        $domains = MultiDomain::findByDomain(
+            Tenant::current()->domain
+        );
+
+        foreach ($domains as $domain) {
+            app(DomainServiceProvider::class, compact('domain'))
+                ->unregisterProviders();
+        }
     }
 }
 ```
@@ -125,7 +132,6 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [foxws](https://github.com/foxws)
 - [laravel-modules](https://github.com/nWidart/laravel-modules)
 - [Spatie](https://github.com/spatie)
 - [All Contributors](../../contributors)

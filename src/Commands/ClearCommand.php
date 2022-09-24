@@ -1,23 +1,25 @@
 <?php
 
-namespace Foxws\LaravelMultidomain\Commands;
+namespace Foxws\MultiDomain\Commands;
 
-use Foxws\LaravelMultidomain\Contracts\RepositoryInterface;
-use Foxws\LaravelMultidomain\Support\DomainRepository;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 
 class ClearCommand extends Command
 {
     public $signature = 'multidomain:clear';
 
-    public $description = 'Clear the domain repository cache.';
+    public $description = 'Clear the multidomain cache.';
 
     public function handle(): void
     {
-        /** @var DomainRepository $repository */
-        $repository = app(RepositoryInterface::class);
-        $repository->removeCached();
+        $this->clearCache();
 
-        $this->info('Domains cached cleared.');
+        $this->info('Domain cache cleared.');
+    }
+
+    protected function clearCache(): bool
+    {
+        return Cache::forget('multidomain');
     }
 }

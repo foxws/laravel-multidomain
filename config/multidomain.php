@@ -14,41 +14,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Domain path
+    | Domain caching
     |--------------------------------------------------------------------------
     |
-    | This defines the domain root path.
+    | This defines the domain caching.
     |
     */
 
-    'path' => app_path('Domain'),
+    'cache_enabled' => env('MULTIDOMAIN_CACHE_ENABLED', false),
 
-    /*
-    |--------------------------------------------------------------------------
-    | Scan Path
-    |--------------------------------------------------------------------------
-    |
-    | This defines the path to scan for domains.
-    |
-    */
-
-    'scan' => [
-        'enabled' => true,
-        'path' => app_path('Domain/*'),
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Caching
-    |--------------------------------------------------------------------------
-    |
-    | This defines config for setting up caching.
-    |
-    */
-
-    'cache' => [
-        'enabled' => false,
-        'key' => 'multidomain',
-        'lifetime' => 60 * 60 * 24,
-    ],
+    'cache_lifetime' => env('MULTIDOMAIN_CACHE_LIFETIME', 60 * 60 * 24 * 7),
 ];
