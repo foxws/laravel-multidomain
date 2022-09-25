@@ -44,7 +44,7 @@ e.g. `app\Domain\Example\domain.json`:
 }
 ```
 
-> **NOTE:** The `domain` array matches the environment set in `.env`, e.g. `APP_ENV=local` will use `example.test` as it's (route) base.
+> **NOTE:** The `domain` array matches the environment set in `.env`, e.g. `APP_ENV=local` will use `example.test` as it's (routing) base.
 
 The structure of each domain should look like this, using `app\Domain\Example` as it's root path:
 
@@ -54,13 +54,13 @@ The structure of each domain should look like this, using `app\Domain\Example` a
 | Routes\api.php | The domain api routes. | ✅ |
 | Config\\*.php | The domain config files. | ✅ |
 | Providers | The domain providers (optional). | |
+| Resources\Components | The domain Blade components (optional). | ✅ |
 | Resources\Translations | The domain translation files (optional). | |
 | Resources\Views | The domain Blade views (optional). | ✅ |
-| Resources\Components | The domain Blade components (optional). | ✅ |
 
 It will register each config, routes, views, components, using the domain's namespace in lowercase, e.g. `example`.
 
-> **NOTE:** Service Providers will not be registred by default, see [Switch Task](#switch-task) to register at runtime.
+> **NOTE:** Service Providers will not be registred by default, see [Laravel Multitenancy](#laravel-multitenancy) to register at runtime.
 
 To interact with the domain(s), one may use the following:
 
@@ -72,7 +72,9 @@ To interact with the domain(s), one may use the following:
 | `domain('example')` | Would return a domain instance. |
 | `<x-example::menu-component />` | Would return the `MenuComponent` located in components. |
 
-## Switch Task
+## Laravel Multitenancy
+
+### Service Providers
 
 When using Spatie's [laravel-multitenancy](https://github.com/spatie/laravel-multitenancy), one may want to use the following task to auto register service providers for each domain:
 
@@ -110,6 +112,20 @@ class SwitchDomainTask implements SwitchTenantTask
         }
     }
 }
+```
+
+### Route caching
+
+Update `config/multitenancy.php`:
+
+```php
+'shared_routes_cache' => true,
+```
+
+To optimize/cache the routes:
+
+```bash
+php artisan tenant:artisan route:cache
 ```
 
 ## Testing
