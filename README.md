@@ -13,6 +13,8 @@ It is intended to complement a multi-tenancy package such as [spatie/laravel-mul
 
 It allows caching of configs, routes & views, and is made to be easy to install, as there is no need to modify the core of the Laravel Framework.
 
+> **TIP:** See [foxws/laravel-multidomain-demo](https://github.com/foxws/laravel-multidomain-demo) for a boilerplate.
+
 ## Installation
 
 Install the package via composer:
