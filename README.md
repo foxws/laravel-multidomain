@@ -130,6 +130,23 @@ To optimize/cache the routes:
 php artisan tenant:artisan route:cache
 ```
 
+### View caching
+
+Update `config/views.php`:
+
+```php
+'paths' => [
+    app_path('Core'),
+    app_path('Domain'),
+],
+```
+
+To optimize/cache the views:
+
+```bash
+php artisan view:cache
+```
+
 ## Testing
 
 ```bash
