@@ -37,10 +37,7 @@
     "autoload": {
         "psr-4": {
             "Foxws\\MultiDomain\\": "src"
-        },
-        "files": [
-            "src/Helpers/functions.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
