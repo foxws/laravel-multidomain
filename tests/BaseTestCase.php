@@ -2,8 +2,8 @@
 
 namespace Foxws\LaravelMultidomain\Tests;
 
-use Orchestra\Testbench\TestCase as Orchestra;
 use Foxws\MultiDomain\MultiDomainServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class BaseTestCase extends Orchestra
 {

@@ -2,13 +2,13 @@
 
 namespace Foxws\MultiDomain;
 
+use Foxws\MultiDomain\Providers\DomainServiceProvider;
+use Foxws\MultiDomain\Support\Domain;
 use Illuminate\Cache\Repository as CacheRepository;
 use Illuminate\Config\Repository as ConfigRepository;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
-use Foxws\MultiDomain\Providers\DomainServiceProvider;
-use Foxws\MultiDomain\Support\Domain;
 
 class MultiDomain
 {

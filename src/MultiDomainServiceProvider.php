@@ -2,9 +2,9 @@
 
 namespace Foxws\MultiDomain;
 
-use Illuminate\Foundation\Application as FoundationApplication;
 use Foxws\MultiDomain\Commands\ClearCommand;
 use Foxws\MultiDomain\Providers\DomainServiceProvider;
+use Illuminate\Foundation\Application as FoundationApplication;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 

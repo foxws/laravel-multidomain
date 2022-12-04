@@ -2,11 +2,11 @@
 
 namespace Foxws\MultiDomain\Providers;
 
+use Foxws\MultiDomain\Support\Domain;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Foxws\MultiDomain\Support\Domain;
 
 class DomainServiceProvider extends ServiceProvider
 {
