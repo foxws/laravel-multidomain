@@ -30,7 +30,7 @@ class MultiDomain
         $provider->boot();
     }
 
-    protected function findByDomain(string $domain): Domain
+    public function findByDomain(string $domain): Domain
     {
         $domains = $this->config->get('multidomain.cache_enabled', false)
             ? $this->cached()
@@ -39,6 +39,17 @@ class MultiDomain
         return $domains
             ->each(fn (Domain $item) => $item->domain = $item->domain[$this->app->environment()] ?? null)
             ->firstOrFail(fn (Domain $item) => $item->domain === $domain);
+    }
+    
+    public function findByName(string $name): Domain
+    {
+        $domains = $this->config->get('multidomain.cache_enabled', false)
+            ? $this->cached()
+            : $this->all();
+
+        return $domains
+            ->each(fn (Domain $item) => $item->domain = $item->domain[$this->app->environment()] ?? null)
+            ->firstOrFail(fn (Domain $item) => $item->name === $name);
     }
 
     protected function all(): Collection
