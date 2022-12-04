@@ -40,7 +40,7 @@ class MultiDomain
             ->each(fn (Domain $item) => $item->domain = $item->domain[$this->app->environment()] ?? null)
             ->firstOrFail(fn (Domain $item) => $item->domain === $domain);
     }
-    
+
     public function findByName(string $name): Domain
     {
         $domains = $this->config->get('multidomain.cache_enabled', false)
