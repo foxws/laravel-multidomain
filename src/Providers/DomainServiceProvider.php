@@ -19,6 +19,7 @@ class DomainServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->registerConfigs();
+        $this->registerProviders();
     }
 
     public function boot(): void
