@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-multidomain` will be documented in this file.
 
+## 0.32.0 - 2022-12-04
+
+- Add `findByName`
+- Make `findByDomain` and `findByName` public
+
 ## 0.31.0 - 2022-12-04
 
 BREAKING CHANGES: Please follow the installation steps.
