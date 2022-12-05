@@ -25,8 +25,10 @@ class MultiDomain
         $domain = $this->findByDomain($domain);
 
         $provider = $this->app->make(DomainServiceProvider::class, compact('domain'));
-        
-        if (!$domain) return;
+
+        if (! $domain) {
+            return;
+        }
 
         $provider->register();
         $provider->boot();
