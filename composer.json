@@ -7,7 +7,7 @@
     "laravel-multidomain",
     "livewire-multidomain"
   ],
-  "homepage": "https://bitbucket.org/foxws-nl/laravel-multidomain",
+  "homepage": "https://github.com/foxws/laravel-multidomain",
   "license": "MIT",
   "authors": [
     {
