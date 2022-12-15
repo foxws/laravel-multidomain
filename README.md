@@ -83,6 +83,13 @@ To interact with the domain(s), one may use the following:
 | `view('example::home')`         | Would return the `home.blade.php` located in views.     |
 | `<x-example::menu-component />` | Would return the `MenuComponent` located in components. |
 
+When you have installed `livewire/livewire`, use the following helpers:
+
+| Helper                                | Description                                           |
+| ------------------------------------- | ----------------------------------------------------- |
+| `@livewire('example.component-name')` | @livewire blade directive.                            |
+| `<livewire:example.component-name />` | <livewire: tag syntax.                                |
+
 ## Testing
 
 ```bash
