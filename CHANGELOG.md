@@ -2,6 +2,16 @@
 
 All notable changes to `laravel-multidomain` will be documented in this file.
 
+## 0.40.0 - 2022-12-15
+
+BREAKING CHANGES: Please follow the installation steps.
+
+- Merged Livewire support
+- Add middlewares
+- Code refactoring
+
+**Full Changelog**: https://github.com/foxws/laravel-multidomain/compare/0.32.0...0.40.0
+
 ## 0.32.0 - 2022-12-04
 
 - Add `findByName`
