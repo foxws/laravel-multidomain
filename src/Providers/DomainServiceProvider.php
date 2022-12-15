@@ -2,13 +2,13 @@
 
 namespace Foxws\MultiDomain\Providers;
 
+use Foxws\MultiDomain\Livewire\LivewireComponentsFinder;
+use Foxws\MultiDomain\Support\Domain;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Foxws\MultiDomain\Livewire\LivewireComponentsFinder;
-use Foxws\MultiDomain\Support\Domain;
 
 class DomainServiceProvider extends ServiceProvider
 {

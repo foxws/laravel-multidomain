@@ -2,11 +2,11 @@
 
 namespace Foxws\MultiDomain;
 
-use Illuminate\Foundation\Application;
 use Foxws\MultiDomain\Commands\ClearCommand;
 use Foxws\MultiDomain\Livewire\LivewireManager as LivewireLivewireManager;
 use Foxws\MultiDomain\Providers\DomainServiceProvider;
 use Foxws\MultiDomain\Support\DomainFinder;
+use Illuminate\Foundation\Application;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
