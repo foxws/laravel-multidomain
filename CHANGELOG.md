@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-multidomain` will be documented in this file.
 
+## 0.42.0 - 2022-12-15
+
+- Add Livewire instructions
+
+**Full Changelog**: https://github.com/foxws/laravel-multidomain/compare/0.41.0...0.42.0
+
 ## 0.41.0 - 2022-12-15
 
 - Fix homepage
