@@ -2,11 +2,13 @@
 
 namespace Foxws\MultiDomain\Providers;
 
-use Foxws\MultiDomain\Support\Domain;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Foxws\MultiDomain\Livewire\LivewireComponentsFinder;
+use Foxws\MultiDomain\Support\Domain;
 
 class DomainServiceProvider extends ServiceProvider
 {
@@ -20,6 +22,10 @@ class DomainServiceProvider extends ServiceProvider
     {
         $this->registerConfigs();
         $this->registerProviders();
+
+        if (class_exists('\Livewire\LivewireManager')) {
+            $this->registerLivewireComponents();
+        }
     }
 
     public function boot(): void
@@ -93,6 +99,22 @@ class DomainServiceProvider extends ServiceProvider
             $this->path('Resources/Translations'),
             $this->name()
         );
+    }
+
+    protected function registerLivewireComponents(): void
+    {
+        $defaultManifestPath = $this->app['livewire']->isRunningServerless()
+            ? "/tmp/storage/bootstrap/cache/livewire-{$this->name()}-components.php"
+            : $this->app->bootstrapPath("cache/livewire-{$this->name()}-components.php");
+
+        $this->app->bind(LivewireComponentsFinder::class, function () use ($defaultManifestPath) {
+            return new LivewireComponentsFinder(
+                files: new Filesystem,
+                manifestPath: config('livewire.manifest_path') ?: $defaultManifestPath,
+                prefix: $this->name(),
+                path: $this->path(),
+            );
+        });
     }
 
     protected function registerProviders(): void

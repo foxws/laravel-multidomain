@@ -9,7 +9,7 @@
 
 This package allows a single Laravel application to work with multiple domains/tenants.
 
-It is intended to complement a multi-tenancy package such as [spatie/laravel-multitenancy](https://github.com/spatie/laravel-multitenancy) (tested and supported), [archtechx/tenancy](https://github.com/archtechx/tenancy), etc.
+It is intended to complement a multi-tenancy package such as [spatie/laravel-multitenancy](https://github.com/spatie/laravel-multitenancy) (tested), [archtechx/tenancy](https://github.com/archtechx/tenancy), etc.
 
 It allows caching of configs, routes & views, and is made to be easy to install, as there is no need to modify the core of the Laravel Framework.
 
@@ -29,37 +29,21 @@ Publish the config file with:
 php artisan vendor:publish --tag="multidomain-config"
 ```
 
-### Laravel Multitenancy
-
-When using Spatie's [laravel-multitenancy](https://github.com/spatie/laravel-multitenancy), one may want to use the following task to auto register:
-
-> **NOTE:** Please see [documentation](https://spatie.be/docs/laravel-multitenancy/v2/using-tasks-to-prepare-the-environment/creating-your-own-task) for details.
+To prevent domain abuse, register the provided middlewares:
 
 ```php
-<?php
-
-namespace App\Core\Support\Multitenancy\Tasks;
-
-use Foxws\MultiDomain\Facades\MultiDomain;
-use Spatie\Multitenancy\Models\Tenant;
-use Spatie\Multitenancy\Tasks\SwitchTenantTask;
-
-class SwitchDomainTask implements SwitchTenantTask
-{
-    public function makeCurrent(Tenant $tenant): void
-    {
-        MultiDomain::initialize($tenant->domain);
-    }
-
-    public function forgetCurrent(): void
-    {
-    }
-}
+protected $middlewareGroups = [
+    'web' => [
+        // ...
+        \Foxws\MultiDomain\Middlewares\NeedsDomain::class,
+        \Foxws\MultiDomain\Middlewares\EnsureValidDomainSession::class,
+    ]
+];
 ```
 
 ## Usage
 
-The package will scan any subfolder (domain) located in `app\Domain` (customisable) containing a `domain.json` file.
+The package will scan any subfolder (as in domain) located in `app\Domain` (customisable namespace) containing a `domain.json` file.
 
 e.g. `app\Domain\Example\domain.json`:
 
@@ -74,7 +58,7 @@ e.g. `app\Domain\Example\domain.json`:
 }
 ```
 
-> **NOTE:** The `domain` array matches the environment set in `.env`, e.g. `APP_ENV=local` will use `example.test` as it's (routing) base. The `name` is used to register components, routes, views, etc.
+> **NOTE:** The `domain` array matches the environment set in `.env`, e.g. `APP_ENV=local` will use `example.test` as it's (routing) base. The `name` is converted to a (slug) prefix and is to be used for registering components, routes, views, etc.
 
 The structure of each domain should look like this, using `app\Domain\Example` as it's root path:
 
@@ -88,7 +72,7 @@ The structure of each domain should look like this, using `app\Domain\Example` a
 | Resources\Translations | The domain translation files (optional). |           |
 | Resources\Views        | The domain Blade views (optional).       | ✅        |
 
-It will register each config, routes, views, components, using the domain's namespace in lowercase, e.g. `example`.
+It will register each config, routes, views, components, using the domain's namespace in slug, e.g. `example`, `foo-bar`.
 
 To interact with the domain(s), one may use the following:
 
